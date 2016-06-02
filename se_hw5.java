@@ -1,29 +1,30 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*; //¤Ş¥Î³B²z¨Æ¥óªºevent®M¥ó
+import java.awt.event.*; //å¼•ç”¨è™•ç†äº‹ä»¶çš„eventå¥—ä»¶
 
+/*software engineer homework 5 */
 public class se_hw5 extends JFrame{
 	/*
 	 * 2016/6/2
 	 * 
 	 * */
 	
-	/* PARITY¬°true®Éªí¥Ü¥­»ù¡A§Y¥­¤éªº¬P´Á¤@¨ì¬P´Á¤­*/
+	/* PARITYç‚ºtrueæ™‚è¡¨ç¤ºå¹³åƒ¹ï¼Œå³å¹³æ—¥çš„æ˜ŸæœŸä¸€åˆ°æ˜ŸæœŸäº”*/
 	private static final boolean PARITY = true;
 	static int price_adult, price_child, num_adult, num_child, result = 0;
 	
-	/*«Å§i¤¸¥ó*/
-	JLabel label_adult = new JLabel("¦¨¤H : ");	
-	JLabel label_child = new JLabel("¤p«Ä : ");	
+	/*å®£å‘Šå…ƒä»¶*/
+	JLabel label_adult = new JLabel("æˆäºº : ");	
+	JLabel label_child = new JLabel("å°å­© : ");	
 	JTextField textField_adult = new JTextField();	
 	JTextField textField_child = new JTextField();	
-	JButton button_cal = new JButton("­pºâª÷ÃB");
+	JButton button_cal = new JButton("è¨ˆç®—é‡‘é¡");
 	JLabel label_price = new JLabel();
 	
 	public se_hw5(){
 		
-		/* PARITY¬°true®Éªí¥Ü¥­»ù¡A¤j¤H268¤¸¡B¤p«Ä120¤¸¡A
-		 * ¦ÓPARITY¬°false®É¡A¤j¤H368¤¸¡B¤p«Ä150¤¸¡A¦A¥[¦¬10%ªA°È¶O©Ò¥H¤j¤H405¤¸¡B¤p«Ä165¤¸*/
+		/* PARITYç‚ºtrueæ™‚è¡¨ç¤ºå¹³åƒ¹ï¼Œå¤§äºº268å…ƒã€å°å­©120å…ƒï¼Œ
+		 * è€ŒPARITYç‚ºfalseæ™‚ï¼Œå¤§äºº368å…ƒã€å°å­©150å…ƒï¼Œå†åŠ æ”¶10%æœå‹™è²»æ‰€ä»¥å¤§äºº405å…ƒã€å°å­©165å…ƒ*/
 		if(PARITY){
 			price_adult = 268;
 			price_child = 120;
@@ -32,42 +33,42 @@ public class se_hw5 extends JFrame{
 			price_child = 165;
 		}
 		
-		/*«ö¤U­pºâª÷ÃB«ö¶s®ÉÄ²µoªº¨Æ¥ó*/
+		/*æŒ‰ä¸‹è¨ˆç®—é‡‘é¡æŒ‰éˆ•æ™‚è§¸ç™¼çš„äº‹ä»¶*/
 		button_cal.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//System.out.println(textField_adult.getText());
 				
-				/*¥ı­pºâÁ`¦X*/
+				/*å…ˆè¨ˆç®—ç¸½åˆ*/
 				num_adult = Integer.parseInt(textField_adult.getText());
 				num_child = Integer.parseInt(textField_child.getText());
 				result = (num_adult*price_adult) + (num_child*price_child);
 				
-				/*¤T¤H¦P¦æ¤@¤H§K¶O¡A¦pªG²Ä¤T¤H¥i¬°¤p«Ä¡A«hºâ¤p«Ä§K¶O*/
+				/*ä¸‰äººåŒè¡Œä¸€äººå…è²»ï¼Œå¦‚æœç¬¬ä¸‰äººå¯ç‚ºå°å­©ï¼Œå‰‡ç®—å°å­©å…è²»*/
 				//System.out.println((num_adult+num_child)/3);
 				if(((num_adult+num_child)/3)>num_child){
-					/*¦pªG¥i§K¶Oªº¤H¼Æ¶W¹L¤p«Ä¤H¼Æ¡A«h³Ñ¤Uªº»[¤j¤H§K¶O*/
+					/*å¦‚æœå¯å…è²»çš„äººæ•¸è¶…éå°å­©äººæ•¸ï¼Œå‰‡å‰©ä¸‹çš„è’œå¤§äººå…è²»*/
 					result = result - (num_child)*price_child;
 					result = result - (((num_adult+num_child)/3)-num_child)*price_adult;
 				}else{
-					/*§_«h´N¬O¦©¦^´X­Ó¤p«Ä§K¶O§Y¥i*/
+					/*å¦å‰‡å°±æ˜¯æ‰£å›å¹¾å€‹å°å­©å…è²»å³å¯*/
 					result = result - ((num_adult+num_child)/3)*price_child;
 				}
 				
-				/*¦pªG10¤H¥H¤W¦P¦æ¡BÁ`»ù¦A¥´95§é*/
+				/*å¦‚æœ10äººä»¥ä¸ŠåŒè¡Œã€ç¸½åƒ¹å†æ‰“95æŠ˜*/
 				if((num_adult+num_child)>10){
 					float temp = (float)result*(float)0.95;
 					result = Math.round(temp);
 				}
 				
-				/*§âµ²ªGÅã¥Ü¨ì¼ĞÅÒ¤W*/
+				/*æŠŠçµæœé¡¯ç¤ºåˆ°æ¨™ç±¤ä¸Š*/
 				label_price.setText(Integer.toString(result));
 			}
 		});
 		
-		Container cp = getContentPane(); //¨ú±o¤º®e­±ª©
-		/*GridLayout¥¬§½*/
+		Container cp = getContentPane(); //å–å¾—å…§å®¹é¢ç‰ˆ
+		/*GridLayoutå¸ƒå±€*/
 		cp.setLayout(new GridLayout(3, 2, 10, 10));
-		/*¥[¤J¤¸¥ó*/
+		/*åŠ å…¥å…ƒä»¶*/
 		cp.add(label_adult);
 		cp.add(textField_adult);
 		cp.add(label_child);
@@ -76,12 +77,12 @@ public class se_hw5 extends JFrame{
 		cp.add(label_price);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(300, 200); //³]©wµøµ¡®Ø¬[¤j¤p
-		setVisible(true); //Åã¥Üµøµ¡®Ø¬[
+		setSize(300, 200); //è¨­å®šè¦–çª—æ¡†æ¶å¤§å°
+		setVisible(true); //é¡¯ç¤ºè¦–çª—æ¡†æ¶
 	}
 	
 	public static void main(String args[]) {
-		new se_hw5(); //«Å§iµøµ¡®Ø¬[ª«¥ó
+		new se_hw5(); //å®£å‘Šè¦–çª—æ¡†æ¶ç‰©ä»¶
 	}
 
 }
